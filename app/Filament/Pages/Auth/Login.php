@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Filament\Pages\Auth;
+
+use Filament\Auth\Pages\Login as BaseLogin;
+
+class Login extends BaseLogin
+{
+    protected string $view = 'filament.pages.auth.login';
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        $this->form->fill([
+            'email' => 'admin@ajmalnoorwisata.com',
+            'remember' => true,
+        ]);
+    }
+}

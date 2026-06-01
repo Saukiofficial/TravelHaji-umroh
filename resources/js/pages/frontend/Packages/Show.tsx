@@ -245,10 +245,6 @@ export default function PackageShow({
         setData('participants', nextParticipants);
     };
 
-    const getError = (key: string) => {
-        return (errors as Record<string, string>)[key];
-    };
-
     const submit = (e: FormEvent) => {
         e.preventDefault();
 
@@ -266,26 +262,27 @@ export default function PackageShow({
             <Head title={packageData.title} />
 
             {/* HERO */}
-            <section className="relative overflow-hidden bg-[#003f35] px-5 pb-16 pt-16 md:px-8 md:pb-20 md:pt-20">
+            <section className="relative overflow-hidden bg-[#061A35] px-5 pb-16 pt-16 md:px-8 md:pb-20 md:pt-20">
                 {packageData.image ? (
                     <img
                         src={`/storage/${packageData.image}`}
                         alt={packageData.title}
-                        className="absolute inset-0 h-full w-full object-cover opacity-25"
+                        className="absolute inset-0 h-full w-full object-cover opacity-26"
                     />
                 ) : (
                     <img
                         src="/images/mekkah.jpg"
                         alt={packageData.title}
-                        className="absolute inset-0 h-full w-full object-cover opacity-20"
+                        className="absolute inset-0 h-full w-full object-cover opacity-22"
                         onError={(e) => {
                             e.currentTarget.style.display = 'none';
                         }}
                     />
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-r from-[#002920]/98 via-[#003f35]/92 to-[#003f35]/70" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(232,189,98,0.24),transparent_55%)]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#061A35]/98 via-[#0B2D5B]/92 to-[#004F41]/60" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(214,168,79,0.28),transparent_55%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_85%,rgba(234,242,255,0.10),transparent_48%)]" />
                 <div
                     className="absolute inset-0 opacity-15"
                     style={{
@@ -306,21 +303,24 @@ export default function PackageShow({
 
                         <div
                             className={`mb-5 inline-flex rounded-full px-4 py-2 text-xs font-black uppercase tracking-wide shadow ${
-                                isHaji ? 'bg-[#fff3e0] text-[#b56a00]' : 'bg-[#e6f6ef] text-[#004f41]'
+                                isHaji ? 'bg-[#FFF3DF] text-[#A86808]' : 'bg-[#EAF2FF] text-[#0B2D5B]'
                             }`}
                         >
                             {packageData.type?.toUpperCase()}
                         </div>
 
-                        <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl">
+                        <h1
+                            style={{ fontFamily: "'Playfair Display',serif" }}
+                            className="text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl"
+                        >
                             {packageData.title}
                         </h1>
 
-                        <p className="mt-5 text-3xl font-black text-[#e8bd62] md:text-4xl">
+                        <p className="mt-5 text-3xl font-black text-[#F3D58B] md:text-4xl">
                             {formatRupiah(packageData.price)}
                         </p>
 
-                        <p className="mt-5 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
+                        <p className="mt-5 max-w-3xl text-base leading-8 text-white/82 sm:text-lg">
                             {packageData.description ||
                                 'Paket perjalanan ibadah dengan pelayanan terbaik, jadwal jelas, dan pembimbing berpengalaman.'}
                         </p>
@@ -330,7 +330,7 @@ export default function PackageShow({
                                 href={`https://wa.me/${whatsapp}?text=${message}`}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#c68b27] to-[#f4d27f] px-7 py-4 text-sm font-black text-[#003f35] shadow-xl transition hover:scale-105 sm:text-base"
+                                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D6A84F] to-[#F3D58B] px-7 py-4 text-sm font-black text-[#0B2D5B] shadow-xl transition hover:scale-105 sm:text-base"
                             >
                                 Konsultasi Paket Ini
                                 <span>→</span>
@@ -354,26 +354,26 @@ export default function PackageShow({
                         className="w-full"
                         preserveAspectRatio="none"
                     >
-                        <path d="M0 80V40C240 0 480 0 720 40C960 80 1200 80 1440 40V80H0Z" fill="#f8f4ec" />
+                        <path d="M0 80V40C240 0 480 0 720 40C960 80 1200 80 1440 40V80H0Z" fill="#FFF8EC" />
                     </svg>
                 </div>
             </section>
 
             {/* CONTENT */}
-            <section className="relative overflow-hidden bg-[#f8f4ec] px-5 py-16 md:px-8 md:py-20">
+            <section className="relative overflow-hidden bg-[#FFF8EC] px-5 py-16 md:px-8 md:py-20">
                 <div
-                    className="absolute inset-0 opacity-25"
+                    className="absolute inset-0 opacity-30"
                     style={{
                         backgroundImage:
-                            'radial-gradient(circle at 1px 1px, rgba(194,139,41,0.1) 1px, transparent 0)',
+                            'radial-gradient(circle at 1px 1px, rgba(11,45,91,0.10) 1px, transparent 0)',
                         backgroundSize: '28px 28px',
                     }}
                 />
 
                 <div className="relative mx-auto grid max-w-[1600px] gap-8 lg:grid-cols-[1fr_540px]">
                     <div className="space-y-8">
-                        <div className="overflow-hidden rounded-[32px] border border-[#e8e0d0] bg-white shadow-sm">
-                            <div className="relative h-72 bg-[#d5ede5] md:h-[460px]">
+                        <div className="overflow-hidden rounded-[32px] border border-[#E3EAF5] bg-white shadow-sm">
+                            <div className="relative h-72 bg-[#EAF2FF] md:h-[460px]">
                                 {packageData.image ? (
                                     <img
                                         src={`/storage/${packageData.image}`}
@@ -381,14 +381,14 @@ export default function PackageShow({
                                         className="h-full w-full object-cover"
                                     />
                                 ) : (
-                                    <div className="flex h-full items-center justify-center text-[#004f41]/40">
+                                    <div className="flex h-full items-center justify-center text-[#0B2D5B]/40">
                                         Gambar Paket
                                     </div>
                                 )}
 
                                 <div
                                     className={`absolute left-5 top-5 rounded-full px-4 py-2 text-xs font-black shadow ${
-                                        isHaji ? 'bg-[#fff3e0] text-[#b56a00]' : 'bg-[#e6f6ef] text-[#004f41]'
+                                        isHaji ? 'bg-[#FFF3DF] text-[#A86808]' : 'bg-[#EAF2FF] text-[#0B2D5B]'
                                     }`}
                                 >
                                     {packageData.type?.toUpperCase()}
@@ -415,10 +415,13 @@ export default function PackageShow({
                         {relatedPackages.length > 0 && (
                             <div>
                                 <div className="mb-6">
-                                    <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                                    <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                                         PAKET TERKAIT
                                     </p>
-                                    <h2 className="mt-2 text-3xl font-black text-[#003f35]">
+                                    <h2
+                                        style={{ fontFamily: "'Playfair Display',serif" }}
+                                        className="mt-2 text-3xl font-black text-[#0B2D5B]"
+                                    >
                                         Paket Lain yang Mungkin Cocok
                                     </h2>
                                 </div>
@@ -428,27 +431,30 @@ export default function PackageShow({
                                         <Link
                                             key={item.id}
                                             href={`/paket/${item.slug}`}
-                                            className="rounded-[24px] border border-[#e8e0d0] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                                            className="rounded-[24px] border border-[#E3EAF5] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-[#D6A84F]/55 hover:shadow-lg"
                                         >
                                             <span
                                                 className={`rounded-full px-3 py-1.5 text-xs font-black ${
                                                     item.type?.toLowerCase() === 'haji'
-                                                        ? 'bg-[#fff3e0] text-[#b56a00]'
-                                                        : 'bg-[#e6f6ef] text-[#004f41]'
+                                                        ? 'bg-[#FFF3DF] text-[#A86808]'
+                                                        : 'bg-[#EAF2FF] text-[#0B2D5B]'
                                                 }`}
                                             >
                                                 {item.type?.toUpperCase()}
                                             </span>
 
-                                            <h3 className="mt-4 text-lg font-black leading-snug text-[#003f35]">
+                                            <h3
+                                                style={{ fontFamily: "'Playfair Display',serif" }}
+                                                className="mt-4 text-lg font-black leading-snug text-[#0B2D5B]"
+                                            >
                                                 {item.title}
                                             </h3>
 
-                                            <p className="mt-3 text-xl font-black text-[#b67b1a]">
+                                            <p className="mt-3 text-xl font-black text-[#B7791F]">
                                                 {formatRupiah(item.price)}
                                             </p>
 
-                                            <p className="mt-3 text-sm font-black text-[#004f41]">
+                                            <p className="mt-3 text-sm font-black text-[#0B2D5B] transition hover:text-[#B7791F]">
                                                 Lihat Detail →
                                             </p>
                                         </Link>
@@ -459,29 +465,35 @@ export default function PackageShow({
                     </div>
 
                     {/* FORM */}
-                    <aside id="form-pendaftaran" className="h-fit rounded-[32px] border border-[#e8e0d0] bg-white p-5 shadow-xl lg:sticky lg:top-28 md:p-6">
-                        <div className="mb-5 rounded-3xl bg-[#f4fbf8] p-5">
-                            <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                    <aside
+                        id="form-pendaftaran"
+                        className="h-fit rounded-[32px] border border-[#E3EAF5] bg-white p-5 shadow-xl lg:sticky lg:top-28 md:p-6"
+                    >
+                        <div className="mb-5 rounded-3xl bg-[#EAF2FF] p-5">
+                            <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                                 FORM PENDAFTARAN
                             </p>
-                            <h2 className="mt-2 text-2xl font-black text-[#003f35]">
+                            <h2
+                                style={{ fontFamily: "'Playfair Display',serif" }}
+                                className="mt-2 text-2xl font-black text-[#0B2D5B]"
+                            >
                                 Daftar Paket Ini
                             </h2>
-                            <p className="mt-2 text-sm leading-7 text-slate-500">
+                            <p className="mt-2 text-sm leading-7 text-[#64748B]">
                                 Jika jumlah peserta lebih dari 1, sistem akan otomatis menampilkan
                                 form data jamaah sesuai jumlah peserta.
                             </p>
                         </div>
 
                         {successMessage && (
-                            <div className="mb-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-bold text-green-700">
+                            <div className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-bold text-emerald-700">
                                 {successMessage}
                             </div>
                         )}
 
                         <form onSubmit={submit} className="space-y-5">
-                            <div className="rounded-[24px] border border-[#e8e0d0] bg-[#fafaf7] p-4">
-                                <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                            <div className="rounded-[24px] border border-[#E3EAF5] bg-[#F7FAFF] p-4">
+                                <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                                     DATA BOOKING
                                 </p>
 
@@ -553,7 +565,7 @@ export default function PackageShow({
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full rounded-2xl bg-[#004f41] px-6 py-4 text-sm font-black text-white shadow-lg transition hover:bg-[#003f35] disabled:cursor-not-allowed disabled:opacity-60"
+                                className="w-full rounded-2xl bg-[#0B2D5B] px-6 py-4 text-sm font-black text-white shadow-lg transition hover:bg-[#061A35] disabled:cursor-not-allowed disabled:opacity-60"
                             >
                                 {processing ? 'Mengirim Pendaftaran...' : 'Kirim Pendaftaran'}
                             </button>
@@ -562,7 +574,7 @@ export default function PackageShow({
                                 href={`https://wa.me/${whatsapp}?text=${message}`}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex w-full items-center justify-center rounded-2xl border border-[#004f41] px-6 py-4 text-sm font-black text-[#004f41] transition hover:bg-[#f4fbf8]"
+                                className="inline-flex w-full items-center justify-center rounded-2xl border border-[#0B2D5B] px-6 py-4 text-sm font-black text-[#0B2D5B] transition hover:bg-[#EAF2FF]"
                             >
                                 Tanya Admin via WhatsApp
                             </a>
@@ -590,18 +602,21 @@ function ParticipantFormCard({
     const prefix = `participants.${index}`;
 
     return (
-        <div className="rounded-[24px] border border-[#e8e0d0] bg-white p-4 shadow-sm">
-            <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl bg-[#f4fbf8] px-4 py-3">
+        <div className="rounded-[24px] border border-[#E3EAF5] bg-white p-4 shadow-sm">
+            <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl bg-[#EAF2FF] px-4 py-3">
                 <div>
-                    <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                    <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                         DATA JAMAAH
                     </p>
-                    <h3 className="text-lg font-black text-[#003f35]">
+                    <h3
+                        style={{ fontFamily: "'Playfair Display',serif" }}
+                        className="text-lg font-black text-[#0B2D5B]"
+                    >
                         Peserta {index + 1}
                     </h3>
                 </div>
 
-                <span className="rounded-full bg-[#004f41] px-3 py-1.5 text-xs font-black text-white">
+                <span className="rounded-full bg-[#0B2D5B] px-3 py-1.5 text-xs font-black text-white">
                     Jamaah
                 </span>
             </div>
@@ -616,13 +631,13 @@ function ParticipantFormCard({
                 />
 
                 <div>
-                    <label className="text-sm font-black text-[#003f35]">
+                    <label className="text-sm font-black text-[#0B2D5B]">
                         Jenis Kelamin
                     </label>
                     <select
                         value={participant.gender}
                         onChange={(e) => onChange('gender', e.target.value)}
-                        className="mt-1 w-full rounded-2xl border border-[#e8e0d0] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#004f41] focus:ring-4 focus:ring-[#004f41]/10"
+                        className="mt-1 w-full rounded-2xl border border-[#E3EAF5] bg-white px-4 py-3 text-sm text-[#102033] outline-none transition focus:border-[#0B2D5B] focus:ring-4 focus:ring-[#0B2D5B]/10"
                     >
                         <option value="">Pilih Jenis Kelamin</option>
                         <option value="Laki-laki">Laki-laki</option>
@@ -675,8 +690,8 @@ function ParticipantFormCard({
                     error={errors[`${prefix}.address`]}
                 />
 
-                <div className="rounded-2xl border border-[#e8e0d0] bg-[#fafaf7] p-4">
-                    <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                <div className="rounded-2xl border border-[#E3EAF5] bg-[#F7FAFF] p-4">
+                    <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                         DATA PASPOR
                     </p>
 
@@ -706,8 +721,8 @@ function ParticipantFormCard({
                     </div>
                 </div>
 
-                <div className="rounded-2xl border border-[#e8e0d0] bg-[#fafaf7] p-4">
-                    <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                <div className="rounded-2xl border border-[#E3EAF5] bg-[#F7FAFF] p-4">
+                    <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                         KONTAK DARURAT & CATATAN
                     </p>
 
@@ -742,11 +757,11 @@ function ParticipantFormCard({
                     </div>
                 </div>
 
-                <div className="rounded-2xl border border-[#e8e0d0] bg-[#fafaf7] p-4">
-                    <p className="text-xs font-black uppercase tracking-widest text-[#c68b27]">
+                <div className="rounded-2xl border border-[#E3EAF5] bg-[#F7FAFF] p-4">
+                    <p className="text-xs font-black uppercase tracking-widest text-[#D6A84F]">
                         DOKUMEN PESERTA {index + 1}
                     </p>
-                    <p className="mt-1 text-xs leading-6 text-slate-500">
+                    <p className="mt-1 text-xs leading-6 text-[#64748B]">
                         Upload dokumen khusus untuk peserta ini. Format JPG, PNG, WEBP, atau PDF.
                         Maksimal 4 MB per dokumen.
                     </p>
@@ -780,16 +795,16 @@ function InfoBox({
     value: string;
 }) {
     return (
-        <div className="rounded-2xl border border-[#e8e0d0] bg-[#fafaf7] p-4">
+        <div className="rounded-2xl border border-[#E3EAF5] bg-[#F7FAFF] p-4">
             <div className="flex items-start gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e6f6ef] text-lg">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EAF2FF] text-lg">
                     {icon}
                 </span>
                 <div>
-                    <p className="text-xs font-black uppercase tracking-wide text-slate-400">
+                    <p className="text-xs font-black uppercase tracking-wide text-[#64748B]">
                         {label}
                     </p>
-                    <p className="mt-1 font-black text-[#003f35]">{value}</p>
+                    <p className="mt-1 font-black text-[#0B2D5B]">{value}</p>
                 </div>
             </div>
         </div>
@@ -806,11 +821,14 @@ function ContentSection({
     if (!content) return null;
 
     return (
-        <div className="rounded-[28px] border border-[#e8e0d0] bg-white p-6 shadow-sm md:p-7">
-            <h2 className="text-2xl font-black text-[#003f35] md:text-3xl">
+        <div className="rounded-[28px] border border-[#E3EAF5] bg-white p-6 shadow-sm md:p-7">
+            <h2
+                style={{ fontFamily: "'Playfair Display',serif" }}
+                className="text-2xl font-black text-[#0B2D5B] md:text-3xl"
+            >
                 {title}
             </h2>
-            <div className="mt-4 whitespace-pre-line text-sm leading-8 text-slate-600 md:text-base">
+            <div className="mt-4 whitespace-pre-line text-sm leading-8 text-[#475569] md:text-base">
                 {content}
             </div>
         </div>
@@ -834,14 +852,14 @@ function Input({
 }) {
     return (
         <div>
-            <label className="text-sm font-black text-[#003f35]">
+            <label className="text-sm font-black text-[#0B2D5B]">
                 {label} {required && <span className="text-red-600">*</span>}
             </label>
             <input
                 type={type}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="mt-1 w-full rounded-2xl border border-[#e8e0d0] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#004f41] focus:ring-4 focus:ring-[#004f41]/10"
+                className="mt-1 w-full rounded-2xl border border-[#E3EAF5] bg-white px-4 py-3 text-sm text-[#102033] outline-none transition focus:border-[#0B2D5B] focus:ring-4 focus:ring-[#0B2D5B]/10"
             />
             {error && <ErrorText message={error} />}
         </div>
@@ -861,14 +879,14 @@ function Textarea({
 }) {
     return (
         <div>
-            <label className="text-sm font-black text-[#003f35]">
+            <label className="text-sm font-black text-[#0B2D5B]">
                 {label}
             </label>
             <textarea
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 rows={3}
-                className="mt-1 w-full rounded-2xl border border-[#e8e0d0] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#004f41] focus:ring-4 focus:ring-[#004f41]/10"
+                className="mt-1 w-full rounded-2xl border border-[#E3EAF5] bg-white px-4 py-3 text-sm text-[#102033] outline-none transition focus:border-[#0B2D5B] focus:ring-4 focus:ring-[#0B2D5B]/10"
             />
             {error && <ErrorText message={error} />}
         </div>
@@ -891,12 +909,12 @@ function DocumentUploadField({
     onChange: (file: File | null) => void;
 }) {
     return (
-        <div className="rounded-2xl border border-[#e8e0d0] bg-white p-4">
+        <div className="rounded-2xl border border-[#E3EAF5] bg-white p-4">
             <div className="mb-3">
-                <label className="text-sm font-black text-[#003f35]">
+                <label className="text-sm font-black text-[#0B2D5B]">
                     {label} {required && <span className="text-red-600">*</span>}
                 </label>
-                <p className="mt-1 text-xs leading-5 text-slate-500">
+                <p className="mt-1 text-xs leading-5 text-[#64748B]">
                     {description}
                 </p>
             </div>
@@ -905,11 +923,11 @@ function DocumentUploadField({
                 type="file"
                 accept=".jpg,.jpeg,.png,.webp,.pdf"
                 onChange={(e) => onChange(e.target.files?.[0] || null)}
-                className="w-full rounded-2xl border border-[#e8e0d0] bg-white px-4 py-3 text-xs outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-[#004f41] file:px-4 file:py-2 file:text-xs file:font-black file:text-white hover:file:bg-[#003f35] focus:border-[#004f41] focus:ring-4 focus:ring-[#004f41]/10"
+                className="w-full rounded-2xl border border-[#E3EAF5] bg-white px-4 py-3 text-xs text-[#475569] outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-[#0B2D5B] file:px-4 file:py-2 file:text-xs file:font-black file:text-white hover:file:bg-[#061A35] focus:border-[#0B2D5B] focus:ring-4 focus:ring-[#0B2D5B]/10"
             />
 
             {file && (
-                <div className="mt-3 rounded-xl bg-[#f4fbf8] px-4 py-3 text-xs font-semibold text-[#004f41]">
+                <div className="mt-3 rounded-xl bg-[#EAF2FF] px-4 py-3 text-xs font-semibold text-[#0B2D5B]">
                     File dipilih: {file.name}
                 </div>
             )}

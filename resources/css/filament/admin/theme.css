@@ -1,0 +1,563 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config '../../../../tailwind.config.js';
+
+.fi-simple-layout {
+    min-height: 100vh !important;
+    padding: 0 !important;
+    background: #003f35 !important;
+}
+
+.fi-simple-main {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.fi-simple-main > .fi-simple-page {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.ajmal-login-page {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 80% 10%, rgba(232, 189, 98, 0.22), transparent 34%),
+        linear-gradient(135deg, #fff6e6 0%, #f8ead4 34%, #003f35 35%, #003f35 100%);
+    color: #003f35;
+}
+
+.ajmal-login-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.ajmal-login-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 64%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.92;
+}
+
+.ajmal-login-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(255, 246, 230, 0.30) 0%, rgba(255, 246, 230, 0.08) 38%, rgba(0, 63, 53, 0.18) 55%, rgba(0, 63, 53, 0.96) 100%),
+        linear-gradient(180deg, rgba(0, 63, 53, 0.03) 0%, rgba(0, 63, 53, 0.40) 100%);
+}
+
+.ajmal-login-page::before,
+.ajmal-login-page::after {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    pointer-events: none;
+    opacity: 0.23;
+    z-index: 1;
+    background-image:
+        linear-gradient(30deg, rgba(232, 189, 98, 0.45) 12%, transparent 12.5%, transparent 87%, rgba(232, 189, 98, 0.45) 87.5%, rgba(232, 189, 98, 0.45)),
+        linear-gradient(150deg, rgba(232, 189, 98, 0.45) 12%, transparent 12.5%, transparent 87%, rgba(232, 189, 98, 0.45) 87.5%, rgba(232, 189, 98, 0.45)),
+        linear-gradient(30deg, rgba(232, 189, 98, 0.45) 12%, transparent 12.5%, transparent 87%, rgba(232, 189, 98, 0.45) 87.5%, rgba(232, 189, 98, 0.45)),
+        linear-gradient(150deg, rgba(232, 189, 98, 0.45) 12%, transparent 12.5%, transparent 87%, rgba(232, 189, 98, 0.45) 87.5%, rgba(232, 189, 98, 0.45));
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+}
+
+.ajmal-login-page::before {
+    right: -160px;
+    top: -130px;
+}
+
+.ajmal-login-page::after {
+    left: -210px;
+    bottom: -220px;
+}
+
+.ajmal-login-logo-ribbon {
+    position: absolute;
+    top: 0;
+    left: 54px;
+    z-index: 4;
+    width: 170px;
+    height: 205px;
+    border-radius: 0 0 28px 28px;
+    background: linear-gradient(180deg, #003f35 0%, #005947 100%);
+    border: 1px solid rgba(232, 189, 98, 0.55);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+}
+
+.ajmal-login-logo-ribbon img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 999px;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.28));
+}
+
+.ajmal-login-shell {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(430px, 0.92fr);
+    gap: clamp(32px, 5vw, 90px);
+    align-items: center;
+    padding: 64px clamp(42px, 6vw, 92px);
+}
+
+.ajmal-login-hero {
+    min-height: 76vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 110px;
+}
+
+.ajmal-login-hero-content {
+    max-width: 520px;
+    margin-left: clamp(170px, 16vw, 330px);
+    transform: translateY(-20px);
+}
+
+.ajmal-login-kicker {
+    width: 72px;
+    height: 2px;
+    margin-bottom: 26px;
+    background: linear-gradient(90deg, #c68b27, #f5d081);
+}
+
+.ajmal-login-hero h1 {
+    margin: 0;
+    color: #003f35;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 4.3vw, 72px);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    text-shadow: 0 2px 18px rgba(255, 255, 255, 0.38);
+}
+
+.ajmal-login-line {
+    width: 64px;
+    height: 3px;
+    margin: 26px 0 30px;
+    background: #c68b27;
+}
+
+.ajmal-login-hero p {
+    max-width: 390px;
+    margin: 0;
+    color: rgba(0, 42, 35, 0.82);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.ajmal-login-card-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ajmal-login-card {
+    width: min(100%, 570px);
+    padding: clamp(38px, 4.2vw, 58px);
+    border-radius: 34px;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(232, 189, 98, 0.20), transparent 32%),
+        linear-gradient(180deg, rgba(255, 251, 242, 0.98), rgba(255, 248, 235, 0.96));
+    border: 1px solid rgba(232, 189, 98, 0.42);
+    box-shadow:
+        0 34px 90px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(18px);
+}
+
+.ajmal-login-card-header {
+    text-align: center;
+}
+
+.ajmal-login-card-logo {
+    width: 116px;
+    height: 116px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 999px;
+    filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.18));
+}
+
+.ajmal-login-card h2 {
+    margin: 0;
+    color: #003f35;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(34px, 3vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+}
+
+.ajmal-login-card-tagline {
+    margin: 8px 0 0;
+    color: #c68b27;
+    font-size: clamp(18px, 1.7vw, 25px);
+    font-weight: 500;
+}
+
+.ajmal-login-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 20px auto 28px;
+}
+
+.ajmal-login-divider span {
+    width: 92px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(198, 139, 39, 0.75), transparent);
+}
+
+.ajmal-login-divider b {
+    width: 12px;
+    height: 12px;
+    display: block;
+    transform: rotate(45deg);
+    background: #c68b27;
+    border-radius: 2px;
+}
+
+.ajmal-login-card h3 {
+    margin: 0;
+    color: #003f35;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(25px, 2.2vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.ajmal-login-card-desc {
+    max-width: 430px;
+    margin: 10px auto 28px;
+    color: rgba(0, 42, 35, 0.72);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.ajmal-login-form {
+    margin-top: 20px;
+}
+
+.ajmal-login-form .fi-fo-field-wrp {
+    margin-bottom: 20px;
+}
+
+.ajmal-login-form .fi-fo-field-wrp-label span {
+    color: #003f35 !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+.ajmal-login-form input {
+    min-height: 54px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 63, 53, 0.18) !important;
+    background: rgba(255, 255, 255, 0.86) !important;
+    color: #10231f !important;
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.03),
+        0 12px 28px rgba(0, 63, 53, 0.06) !important;
+}
+
+.ajmal-login-form input:focus {
+    border-color: rgba(198, 139, 39, 0.70) !important;
+    box-shadow:
+        0 0 0 3px rgba(232, 189, 98, 0.20),
+        0 14px 32px rgba(0, 63, 53, 0.08) !important;
+}
+
+.ajmal-login-form input::placeholder {
+    color: rgba(31, 41, 55, 0.45) !important;
+}
+
+.ajmal-login-form .fi-checkbox-input {
+    width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    border-radius: 5px !important;
+    color: #003f35 !important;
+}
+
+.ajmal-login-form .fi-fo-checkbox-list-option-label,
+.ajmal-login-form .fi-checkbox-label {
+    color: rgba(0, 42, 35, 0.78) !important;
+    font-weight: 500 !important;
+}
+
+.ajmal-login-form a {
+    color: #003f35 !important;
+    font-weight: 800 !important;
+}
+
+.ajmal-login-button {
+    width: 100% !important;
+    min-height: 62px !important;
+    margin-top: 8px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(180deg, #f5d081 0%, #c68b27 100%) !important;
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    border: 1px solid rgba(255, 255, 255, 0.42) !important;
+    box-shadow:
+        0 20px 40px rgba(198, 139, 39, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.48) !important;
+    transition: transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+.ajmal-login-button:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 26px 46px rgba(198, 139, 39, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.58) !important;
+}
+
+.ajmal-login-button-icon {
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    margin-right: 10px;
+}
+
+.ajmal-login-button-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.ajmal-login-register {
+    margin-top: 26px;
+    text-align: center;
+    color: rgba(0, 42, 35, 0.66);
+    font-size: 15px;
+}
+
+.ajmal-login-register strong {
+    margin-left: 8px;
+    color: #003f35;
+}
+
+.ajmal-login-trust {
+    width: min(100%, 450px);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 24px 28px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(0, 63, 53, 0.97), rgba(0, 89, 71, 0.94));
+    border: 1px solid rgba(232, 189, 98, 0.70);
+    box-shadow: 0 22px 56px rgba(0, 0, 0, 0.26);
+    color: #ffffff;
+}
+
+.ajmal-desktop-trust {
+    margin-left: 0;
+    margin-top: auto;
+    margin-bottom: 2vh;
+}
+
+.ajmal-mobile-trust {
+    display: none;
+}
+
+.ajmal-login-trust-icon {
+    flex: 0 0 auto;
+    width: 78px;
+    height: 78px;
+    color: #f5d081;
+}
+
+.ajmal-login-trust-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ajmal-login-trust h3 {
+    margin: 0 0 8px;
+    color: #f5d081;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.ajmal-login-trust p {
+    margin: 3px 0;
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 15px;
+}
+
+.ajmal-login-wa {
+    position: fixed;
+    right: 34px;
+    bottom: 30px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+    color: #ffffff !important;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.50);
+    box-shadow: 0 20px 44px rgba(22, 163, 74, 0.34);
+}
+
+.ajmal-login-wa span {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+}
+
+.ajmal-login-wa svg {
+    width: 42px;
+    height: 42px;
+}
+
+.ajmal-login-wa b,
+.ajmal-login-wa small {
+    display: block;
+    line-height: 1.2;
+}
+
+.ajmal-login-wa b {
+    font-size: 15px;
+}
+
+.ajmal-login-wa small {
+    margin-top: 3px;
+    opacity: 0.92;
+}
+
+@media (max-width: 1180px) {
+    .ajmal-login-shell {
+        grid-template-columns: 1fr;
+        padding: 34px 22px 120px;
+    }
+
+    .ajmal-login-bg-image {
+        width: 100%;
+        height: 42%;
+    }
+
+    .ajmal-login-bg-overlay {
+        background:
+            linear-gradient(180deg, rgba(0, 63, 53, 0.15) 0%, rgba(0, 63, 53, 0.88) 40%, rgba(0, 63, 53, 0.97) 100%);
+    }
+
+    .ajmal-login-logo-ribbon {
+        display: none;
+    }
+
+    .ajmal-login-hero {
+        min-height: auto;
+        padding-top: 60px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .ajmal-login-hero-content {
+        margin-left: 0;
+        transform: none;
+    }
+
+    .ajmal-login-kicker,
+    .ajmal-login-line {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ajmal-login-hero h1 {
+        color: #ffffff;
+        font-size: clamp(32px, 8vw, 48px);
+    }
+
+    .ajmal-login-hero p {
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 16px;
+    }
+
+    .ajmal-desktop-trust {
+        display: none;
+    }
+
+    .ajmal-mobile-trust {
+        display: flex;
+        margin: 28px auto 0;
+    }
+
+    .ajmal-login-card {
+        width: min(100%, 560px);
+        padding: 32px 20px;
+        border-radius: 28px;
+    }
+
+    .ajmal-login-wa {
+        right: 18px;
+        bottom: 18px;
+        padding: 12px 16px;
+    }
+
+    .ajmal-login-wa div {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .ajmal-login-shell {
+        padding-inline: 14px;
+    }
+
+    .ajmal-login-card-logo {
+        width: 96px;
+        height: 96px;
+    }
+
+    .ajmal-login-card h2 {
+        font-size: 32px;
+    }
+
+    .ajmal-login-card-tagline {
+        font-size: 18px;
+    }
+
+    .ajmal-login-divider span {
+        width: 64px;
+    }
+
+    .ajmal-login-trust {
+        padding: 18px;
+        gap: 14px;
+    }
+
+    .ajmal-login-trust-icon {
+        width: 58px;
+        height: 58px;
+    }
+
+    .ajmal-login-trust h3 {
+        font-size: 18px;
+    }
+
+    .ajmal-login-trust p {
+        font-size: 13px;
+    }
+}
