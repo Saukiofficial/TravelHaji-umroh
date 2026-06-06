@@ -14,8 +14,28 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $setting = Setting::query()->first();
+
         return Inertia::render('frontend/Home', [
-            'setting' => Setting::query()->first(),
+            'setting' => [
+                'website_name' => $setting?->website_name,
+                'logo' => $setting?->logo,
+                'hero_image' => $setting?->hero_image,
+
+                'phone' => $setting?->phone,
+                'whatsapp' => $setting?->whatsapp,
+                'email' => $setting?->email,
+                'address' => $setting?->address,
+                'google_maps' => $setting?->google_maps,
+
+                'instagram' => $setting?->instagram,
+                'facebook' => $setting?->facebook,
+                'tiktok' => $setting?->tiktok,
+                'youtube' => $setting?->youtube,
+
+                'meta_title' => $setting?->meta_title,
+                'meta_description' => $setting?->meta_description,
+            ],
 
             'featuredPackages' => Package::query()
                 ->where('status', 'published')

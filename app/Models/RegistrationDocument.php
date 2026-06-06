@@ -21,6 +21,13 @@ class RegistrationDocument extends Model
         'verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'document_label_value',
+        'status_label_value',
+        'status_color_value',
+        'status_bg_value',
+    ];
+
     public function registration(): BelongsTo
     {
         return $this->belongsTo(Registration::class);
@@ -52,5 +59,42 @@ class RegistrationDocument extends Model
             'perlu_revisi' => 'Perlu Revisi',
             'ditolak' => 'Ditolak',
         ];
+    }
+
+    public function getDocumentLabelValueAttribute(): string
+    {
+        return self::documentTypeOptions()[$this->document_type] ?? 'Dokumen';
+    }
+
+    public function getStatusLabelValueAttribute(): string
+    {
+        return self::statusOptions()[$this->status] ?? 'Belum Dicek';
+    }
+
+    public function getStatusColorValueAttribute(): string
+    {
+        return match ($this->status) {
+            'valid' => '#22c55e',
+            'perlu_revisi' => '#f59e0b',
+            'ditolak' => '#ef4444',
+            'belum_dicek' => '#38bdf8',
+            default => '#a1a1aa',
+        };
+    }
+
+    public function getStatusBgValueAttribute(): string
+    {
+        return match ($this->status) {
+            'valid' => 'rgba(34, 197, 94, 0.12)',
+            'perlu_revisi' => 'rgba(245, 158, 11, 0.12)',
+            'ditolak' => 'rgba(239, 68, 68, 0.12)',
+            'belum_dicek' => 'rgba(56, 189, 248, 0.12)',
+            default => 'rgba(161, 161, 170, 0.12)',
+        };
+    }
+
+    public function needsRevision(): bool
+    {
+        return in_array($this->status, ['perlu_revisi', 'ditolak'], true);
     }
 }

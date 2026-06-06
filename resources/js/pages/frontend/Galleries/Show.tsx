@@ -25,7 +25,9 @@ export default function GalleryShow({
         'Assalamu’alaikum, saya ingin konsultasi paket haji & umroh Ajmal Noor Wisata.',
     );
 
-    const isVideo = gallery.type === 'video';
+    const galleryType = String(gallery.type || '').toLowerCase();
+    const isVideo = galleryType === 'video';
+    const embedUrl = isVideo && gallery.video_url ? convertToEmbedUrl(gallery.video_url) : '';
 
     const formatDate = (value?: string | null) => {
         if (!value) return '-';
@@ -115,16 +117,36 @@ export default function GalleryShow({
                 <div className="relative mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[1fr_360px]">
                     <div className="overflow-hidden rounded-[32px] border border-[#E3EAF5] bg-white shadow-sm">
                         <div className="bg-[#EAF2FF]">
-                            {isVideo && gallery.video_url ? (
-                                <div className="aspect-video w-full overflow-hidden bg-black">
-                                    <iframe
-                                        src={convertToEmbedUrl(gallery.video_url)}
-                                        title={gallery.title}
-                                        className="h-full w-full"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    />
-                                </div>
+                            {isVideo ? (
+                                embedUrl ? (
+                                    <div className="aspect-video w-full overflow-hidden bg-black">
+                                        <iframe
+                                            src={embedUrl}
+                                            title={gallery.title}
+                                            className="h-full w-full"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowFullScreen
+                                            referrerPolicy="strict-origin-when-cross-origin"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="flex h-[420px] flex-col items-center justify-center bg-[#EAF2FF] px-6 text-center">
+                                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#0B2D5B] text-3xl text-[#F3D58B]">
+                                            ▶
+                                        </div>
+
+                                        <h3
+                                            style={{ fontFamily: "'Playfair Display',serif" }}
+                                            className="mt-5 text-2xl font-black text-[#0B2D5B]"
+                                        >
+                                            URL Video Belum Tersedia
+                                        </h3>
+
+                                        <p className="mt-2 max-w-md text-sm leading-7 text-[#64748B]">
+                                            Silakan isi URL Video YouTube di admin panel pada data galeri ini.
+                                        </p>
+                                    </div>
+                                )
                             ) : gallery.image ? (
                                 <img
                                     src={`/storage/${gallery.image}`}
@@ -155,9 +177,19 @@ export default function GalleryShow({
                             </p>
 
                             <p className="mt-5 whitespace-pre-line text-sm leading-8 text-[#475569] md:text-base">
-                                {gallery.description ||
-                                    'Dokumentasi perjalanan jamaah Ajmal Noor Wisata.'}
+                                {gallery.description || 'Dokumentasi perjalanan jamaah Ajmal Noor Wisata.'}
                             </p>
+
+                            {isVideo && gallery.video_url && (
+                                <a
+                                    href={gallery.video_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="mt-6 inline-flex items-center rounded-2xl border border-[#0B2D5B] px-5 py-3 text-sm font-black text-[#0B2D5B] transition hover:bg-[#EAF2FF]"
+                                >
+                                    Buka Video di YouTube →
+                                </a>
+                            )}
                         </div>
                     </div>
 
@@ -231,40 +263,52 @@ export default function GalleryShow({
                         </div>
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {relatedGalleries.map((item) => (
-                                <Link
-                                    key={item.id}
-                                    href={`/galeri/${item.id}`}
-                                    className="group overflow-hidden rounded-[26px] border border-[#E3EAF5] bg-white shadow-sm transition hover:-translate-y-1 hover:border-[#D6A84F]/55 hover:shadow-xl"
-                                >
-                                    <div className="h-52 overflow-hidden bg-[#EAF2FF]">
-                                        {item.image ? (
-                                            <img
-                                                src={`/storage/${item.image}`}
-                                                alt={item.title}
-                                                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                                            />
-                                        ) : (
-                                            <div className="flex h-full items-center justify-center text-[#0B2D5B]/40">
-                                                Galeri
-                                            </div>
-                                        )}
-                                    </div>
+                            {relatedGalleries.map((item) => {
+                                const relatedIsVideo = String(item.type || '').toLowerCase() === 'video';
 
-                                    <div className="p-5">
-                                        <h3
-                                            style={{ fontFamily: "'Playfair Display',serif" }}
-                                            className="text-lg font-black text-[#0B2D5B]"
-                                        >
-                                            {item.title}
-                                        </h3>
+                                return (
+                                    <Link
+                                        key={item.id}
+                                        href={`/galeri/${item.id}`}
+                                        className="group overflow-hidden rounded-[26px] border border-[#E3EAF5] bg-white shadow-sm transition hover:-translate-y-1 hover:border-[#D6A84F]/55 hover:shadow-xl"
+                                    >
+                                        <div className="relative h-52 overflow-hidden bg-[#EAF2FF]">
+                                            {item.image ? (
+                                                <img
+                                                    src={`/storage/${item.image}`}
+                                                    alt={item.title}
+                                                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full items-center justify-center text-[#0B2D5B]/40">
+                                                    Galeri
+                                                </div>
+                                            )}
 
-                                        <p className="mt-3 text-sm font-black text-[#0B2D5B] transition group-hover:text-[#B7791F]">
-                                            Lihat Dokumentasi →
-                                        </p>
-                                    </div>
-                                </Link>
-                            ))}
+                                            {relatedIsVideo && (
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-xl text-[#0B2D5B] shadow-xl">
+                                                        ▶
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="p-5">
+                                            <h3
+                                                style={{ fontFamily: "'Playfair Display',serif" }}
+                                                className="text-lg font-black text-[#0B2D5B]"
+                                            >
+                                                {item.title}
+                                            </h3>
+
+                                            <p className="mt-3 text-sm font-black text-[#0B2D5B] transition group-hover:text-[#B7791F]">
+                                                Lihat Dokumentasi →
+                                            </p>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
                 )}
@@ -274,17 +318,42 @@ export default function GalleryShow({
 }
 
 function convertToEmbedUrl(url: string) {
-    if (url.includes('youtube.com/watch?v=')) {
-        return url.replace('watch?v=', 'embed/');
+    try {
+        const parsedUrl = new URL(url);
+        const host = parsedUrl.hostname.replace('www.', '');
+
+        let videoId = '';
+
+        if (host === 'youtube.com' || host === 'm.youtube.com') {
+            if (parsedUrl.pathname === '/watch') {
+                videoId = parsedUrl.searchParams.get('v') || '';
+            }
+
+            if (parsedUrl.pathname.startsWith('/embed/')) {
+                videoId = parsedUrl.pathname.split('/embed/')[1]?.split('/')[0] || '';
+            }
+
+            if (parsedUrl.pathname.startsWith('/shorts/')) {
+                videoId = parsedUrl.pathname.split('/shorts/')[1]?.split('/')[0] || '';
+            }
+
+            if (parsedUrl.pathname.startsWith('/live/')) {
+                videoId = parsedUrl.pathname.split('/live/')[1]?.split('/')[0] || '';
+            }
+        }
+
+        if (host === 'youtu.be') {
+            videoId = parsedUrl.pathname.replace('/', '').split('/')[0] || '';
+        }
+
+        if (!videoId) {
+            return url;
+        }
+
+        return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    } catch {
+        return url;
     }
-
-    if (url.includes('youtu.be/')) {
-        const videoId = url.split('youtu.be/')[1]?.split('?')[0];
-
-        return `https://www.youtube.com/embed/${videoId}`;
-    }
-
-    return url;
 }
 
 function Pattern({

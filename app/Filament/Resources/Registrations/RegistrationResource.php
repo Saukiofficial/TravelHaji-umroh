@@ -7,6 +7,7 @@ use App\Filament\Resources\Registrations\Pages\EditRegistration;
 use App\Filament\Resources\Registrations\Pages\ListRegistrations;
 use App\Filament\Resources\Registrations\Pages\ViewRegistration;
 use App\Filament\Resources\Registrations\Schemas\RegistrationForm;
+use App\Filament\Resources\Registrations\Schemas\RegistrationInfolist;
 use App\Filament\Resources\Registrations\Tables\RegistrationsTable;
 use App\Models\Registration;
 use BackedEnum;
@@ -37,6 +38,11 @@ class RegistrationResource extends Resource
         return RegistrationForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return RegistrationInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return RegistrationsTable::configure($table);
@@ -49,6 +55,7 @@ class RegistrationResource extends Resource
                 'package',
                 'participants',
                 'participants.documents',
+                'participants.documentRevisions',
                 'documents',
                 'payments',
             ]);

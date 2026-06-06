@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PackageController;
 use App\Http\Controllers\Frontend\RegistrationController;
+use App\Http\Controllers\Frontend\DocumentRevisionController;
 use App\Http\Controllers\Admin\RegistrationBundlePdfController;
 use App\Http\Controllers\Admin\PaymentReceiptPdfController;
 use App\Http\Controllers\Admin\DepartureManifestPdfController;
@@ -47,6 +48,12 @@ Route::get('/admin-reports/departure-groups/{departureGroup}/manifest-pdf', [Dep
 Route::get('/admin-reports/export/registrations', [ReportExportController::class, 'registrations'])
     ->middleware(['auth'])
     ->name('admin.export.registrations');
+    
+Route::get('/revisi-dokumen/{token}', [DocumentRevisionController::class, 'show'])
+    ->name('document-revision.show');
+
+Route::post('/revisi-dokumen/{token}', [DocumentRevisionController::class, 'update'])
+    ->name('document-revision.update');
 
 Route::get('/admin-reports/export/payments', [ReportExportController::class, 'payments'])
     ->middleware(['auth'])

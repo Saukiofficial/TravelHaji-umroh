@@ -91,7 +91,7 @@ export default function Home({
             {/* HERO SECTION */}
             <section className="relative min-h-[680px] overflow-hidden bg-[#061A35] md:min-h-[760px] xl:min-h-[820px]">
                 <img
-                    src="/images/mekkah.jpg"
+                    src="/images/hero-kaabah.jpg"
                     alt="Ka'bah"
                     className="absolute inset-0 h-full w-full object-cover opacity-40"
                     onError={(e) => {
@@ -185,56 +185,7 @@ export default function Home({
                         </div>
                     </div>
 
-                    <div className="relative hidden lg:block">
-                        <div className="absolute -inset-4 rounded-[44px] bg-[#D6A84F]/20 blur-2xl" />
-
-                        <div className="relative overflow-hidden rounded-[32px] border border-white/18 bg-white/96 p-6 shadow-2xl backdrop-blur xl:p-8">
-                            <div className="mb-6 flex items-start gap-4">
-                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B2D5B] to-[#123F7A] text-2xl text-[#F3D58B] shadow-lg">
-                                    ✦
-                                </div>
-
-                                <div>
-                                    <h3
-                                        style={{ fontFamily: "'Playfair Display',serif" }}
-                                        className="text-xl font-black leading-tight text-[#0B2D5B] xl:text-2xl"
-                                    >
-                                        Keunggulan Layanan Kami
-                                    </h3>
-                                    <p className="mt-1.5 text-sm leading-6 text-[#64748B]">
-                                        Kami memastikan setiap jamaah mendapatkan perjalanan terbaik.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="space-y-2.5">
-                                {[
-                                    { icon: '⚖️', text: 'Legalitas resmi & terpercaya' },
-                                    { icon: '👨‍🏫', text: 'Pembimbing ibadah berpengalaman' },
-                                    { icon: '🏨', text: 'Hotel nyaman & strategis' },
-                                    { icon: '✈️', text: 'Maskapai terbaik & terjadwal' },
-                                    { icon: '💰', text: 'Harga transparan tanpa hidden cost' },
-                                    { icon: '💬', text: 'Konsultasi cepat melalui WhatsApp' },
-                                ].map((item) => (
-                                    <div
-                                        key={item.text}
-                                        className="flex items-center gap-3 rounded-xl border border-[#DDE8F7] bg-[#F7FAFF] px-4 py-3"
-                                    >
-                                        <span className="text-base">{item.icon}</span>
-                                        <p className="text-sm font-semibold text-[#102033]">{item.text}</p>
-                                        <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0B2D5B] text-[10px] font-black text-white">
-                                            ✓
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-6 rounded-2xl bg-gradient-to-r from-[#0B2D5B] to-[#123F7A] p-4 text-center">
-                                <p className="text-xs font-bold text-[#F3D58B]">Izin Resmi Kemenag RI</p>
-                                <p className="text-sm font-black text-white">PPIU No. 1234 Tahun 2021</p>
-                            </div>
-                        </div>
-                    </div>
+                    <HeroImagePanel setting={setting} brandName={brandName} />
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 z-10">
@@ -713,6 +664,83 @@ export default function Home({
                 </div>
             </section>
         </FrontendLayout>
+    );
+}
+
+function HeroImagePanel({
+    setting,
+    brandName,
+}: {
+    setting: any;
+    brandName: string;
+}) {
+    const heroImage = setting?.hero_image
+        ? `/storage/${setting.hero_image}`
+        : '/images/hero-kaabah.jpg';
+
+    return (
+        <div className="relative hidden lg:block">
+            <div className="absolute -inset-5 rounded-[44px] bg-[#D6A84F]/20 blur-2xl" />
+
+            <div className="relative overflow-hidden rounded-[34px] border border-white/18 bg-white/10 p-3 shadow-2xl backdrop-blur">
+                <div className="relative h-[560px] overflow-hidden rounded-[28px] bg-[#0B2D5B] xl:h-[620px]">
+                    <img
+                        src={heroImage}
+                        alt={`${brandName} Travel Haji dan Umroh`}
+                        className="h-full w-full object-cover"
+                        onError={(e) => {
+                            e.currentTarget.src = '/images/hero-kaabah.jpg';
+                        }}
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#061A35]/86 via-[#061A35]/12 to-transparent" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(214,168,79,0.18),transparent_45%)]" />
+
+                    <div className="absolute left-6 right-6 top-6 flex items-center justify-between">
+                        <div className="rounded-full border border-white/20 bg-white/12 px-4 py-2 text-xs font-black uppercase tracking-wide text-white backdrop-blur">
+                            Travel Haji & Umroh
+                        </div>
+
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D6A84F]/60 bg-[#0B2D5B]/80 text-[#F3D58B] backdrop-blur">
+                            ✦
+                        </div>
+                    </div>
+
+                    <div className="absolute bottom-0 left-0 right-0 p-6 xl:p-7">
+                        <div className="rounded-[24px] border border-white/16 bg-[#061A35]/84 p-5 text-white shadow-xl backdrop-blur">
+                            <p className="text-xs font-black uppercase tracking-widest text-[#F3D58B]">
+                                {brandName}
+                            </p>
+
+                            <h3
+                                style={{ fontFamily: "'Playfair Display',serif" }}
+                                className="mt-2 text-2xl font-black leading-tight text-white xl:text-3xl"
+                            >
+                                Perjalanan Ibadah yang Nyaman, Aman, dan Terpercaya
+                            </h3>
+
+                            <div className="mt-4 grid grid-cols-3 gap-3">
+                                {[
+                                    { label: 'Legal', value: 'Resmi' },
+                                    { label: 'Jamaah', value: 'Puas' },
+                                    { label: 'Layanan', value: 'Amanah' },
+                                ].map((item) => (
+                                    <div
+                                        key={item.label}
+                                        className="rounded-2xl border border-white/10 bg-white/8 p-3 text-center"
+                                    >
+                                        <p className="text-sm font-black text-[#F3D58B]">{item.value}</p>
+                                        <p className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-white/60">
+                                            {item.label}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

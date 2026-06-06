@@ -5,35 +5,61 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class RegistrationParticipant extends Model
 {
     protected $fillable = [
         'registration_id',
         'order_number',
+
         'name',
         'gender',
-        'birth_date',
         'birth_place',
+        'birth_date',
+        'nik',
         'phone',
         'email',
-        'nik',
+        'address',
+
         'passport_number',
         'passport_issued_at',
         'passport_expired_at',
-        'address',
+
         'emergency_contact_name',
         'emergency_contact_phone',
         'health_note',
         'note',
+
+        'revision_token',
+        'revision_token_created_at',
     ];
 
     protected $casts = [
         'birth_date' => 'date',
         'passport_issued_at' => 'date',
         'passport_expired_at' => 'date',
+        'revision_token_created_at' => 'datetime',
     ];
+
+    protected $appends = [
+        'revision_url',
+    ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (RegistrationParticipant $participant) {
+            if (! $participant->revision_token) {
+                $participant->revision_token = Str::random(64);
+                $participant->revision_token_created_at = now();
+            }
+        });
+    }
+
+    public function whatsappBroadcastRecipients(): HasMany
+{
+    return $this->hasMany(WhatsAppBroadcastRecipient::class, 'registration_participant_id');
+}
 
     public function registration(): BelongsTo
     {
@@ -42,68 +68,84 @@ class RegistrationParticipant extends Model
 
     public function documents(): HasMany
     {
-        return $this->hasMany(RegistrationDocument::class);
+        return $this->hasMany(RegistrationDocument::class, 'registration_participant_id');
     }
 
-    public function departureManifest(): HasOne
+    public function documentRevisions(): HasMany
     {
-        return $this->hasOne(DepartureGroupParticipant::class, 'registration_participant_id');
+        return $this->hasMany(RegistrationDocumentRevision::class, 'registration_participant_id');
     }
 
-    public function getGenderLabelAttribute(): string
+    public function departureGroupParticipants(): HasMany
     {
-        return $this->gender ?: '-';
+        return $this->hasMany(DepartureGroupParticipant::class, 'registration_participant_id');
     }
 
-    public function getPassportStatusAttribute(): string
+    public function ensureRevisionToken(): string
     {
-        if (! $this->passport_number) {
-            return 'Belum Ada Paspor';
+        if (! $this->revision_token) {
+            $this->forceFill([
+                'revision_token' => Str::random(64),
+                'revision_token_created_at' => now(),
+            ])->save();
         }
 
-        if (! $this->passport_expired_at) {
-            return 'Paspor Belum Lengkap';
-        }
-
-        if ($this->passport_expired_at->isPast()) {
-            return 'Paspor Expired';
-        }
-
-        if ($this->passport_expired_at->diffInMonths(now()) < 7) {
-            return 'Masa Berlaku Kurang dari 7 Bulan';
-        }
-
-        return 'Paspor Aman';
+        return $this->revision_token;
     }
 
-    public function getDocumentCompletionStatusAttribute(): string
+    public function regenerateRevisionToken(): string
     {
-        $requiredDocuments = [
-            'ktp',
-            'paspor',
-            'kartu_keluarga',
-        ];
+        $this->forceFill([
+            'revision_token' => Str::random(64),
+            'revision_token_created_at' => now(),
+        ])->save();
 
-        $validDocuments = $this->documents()
-            ->whereIn('document_type', $requiredDocuments)
-            ->where('status', 'valid')
-            ->pluck('document_type')
-            ->toArray();
-
-        foreach ($requiredDocuments as $documentType) {
-            if (! in_array($documentType, $validDocuments, true)) {
-                return 'Belum Lengkap';
-            }
-        }
-
-        return 'Lengkap';
+        return $this->revision_token;
     }
 
-    public static function genderOptions(): array
+    public function getRevisionUrlAttribute(): string
     {
-        return [
-            'Laki-laki' => 'Laki-laki',
-            'Perempuan' => 'Perempuan',
-        ];
+        return url('/revisi-dokumen/' . $this->ensureRevisionToken());
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->name ?: 'Peserta Jamaah';
+    }
+
+    public function getWhatsappNumberAttribute(): ?string
+    {
+        if ($this->phone) {
+            return $this->normalizeWhatsappNumber($this->phone);
+        }
+
+        if ($this->registration?->phone) {
+            return $this->normalizeWhatsappNumber($this->registration->phone);
+        }
+
+        return null;
+    }
+
+    private function normalizeWhatsappNumber(?string $number): ?string
+    {
+        if (! $number) {
+            return null;
+        }
+
+        $number = preg_replace('/[^0-9]/', '', $number);
+
+        if (! $number) {
+            return null;
+        }
+
+        if (str_starts_with($number, '08')) {
+            return '62' . substr($number, 1);
+        }
+
+        if (str_starts_with($number, '8')) {
+            return '62' . $number;
+        }
+
+        return $number;
     }
 }
